@@ -17,7 +17,7 @@ const Photos = () => {
   const confirmLoggedIn = async()=>{
 
     try {
-     const res = await axios.post(  "http://localhost:5500",{ token },{ Headers: {"Content-Type": "application/json", },});
+     const res = await axios.post(  "/",{ token },{ Headers: {"Content-Type": "application/json", },});
     //  return response;
      console.log(res.data.message);
 
