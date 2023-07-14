@@ -28,7 +28,7 @@ const Login =() => {
   const handleSubmit = async (event) => {
     event.preventDefault();
    await axios
-      .post("http://localhost:5500/login", values,{Headers: {
+      .post("https://mern-auth-backend-api-sq2e.onrender.com/login", values,{Headers: {
         "Content-Type": "application/json",
         
     }})

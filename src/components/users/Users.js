@@ -26,7 +26,7 @@ const Users = () => {
   const confirmLoggedIn = async()=>{
 
     try {
-     const res = await axios.post(  "http://localhost:5500",{ token },{ Headers: {"Content-Type": "application/json", },});
+     const res = await axios.post(  "https://mern-auth-backend-api-sq2e.onrender.com/",{ token },{ Headers: {"Content-Type": "application/json", },});
     //  return response;
      console.log(res.data.message);
 
@@ -54,7 +54,7 @@ const Users = () => {
 
   const getResults = () => {
     axios
-      .post("http://localhost:5500/users")
+      .post("https://mern-auth-backend-api-sq2e.onrender.com/users")
       .then((res) => {
         if (res.data === "Error") {
           handleMessage("Errors connecting with database");
