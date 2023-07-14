@@ -1,0 +1,48 @@
+import React from "react";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Home = () => {
+  const[name,setName] =useState("");
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("ourtoken");
+
+  useEffect(()=>{
+    confirmLoggedIn();
+  },[]);
+
+
+  const confirmLoggedIn = async()=>{
+
+    try {
+     const res = await axios.post(  "http://localhost:5500",{ token },{ Headers: {"Content-Type": "application/json", },});
+    //  return response;
+     console.log(res.data.message);
+
+     if(res.data.message ==="Success"){
+      setName(res.data.name);
+      navigate("/")
+
+    }
+    else{
+
+      navigate("/login");
+    }
+
+    } catch (error) {
+     console.error(+error) 
+    }
+  };
+    
+
+  return (
+    <div>
+      <h2>Welcome Home : {name}</h2>
+    </div>
+  );
+
+};
+export default Home;
