@@ -10,10 +10,7 @@ const Home = () => {
 
   const token = localStorage.getItem("ourtoken");
 
-  useEffect(()=>{
-    confirmLoggedIn();
-  },[]);
-
+ 
  
   const confirmLoggedIn = async()=>{
 
@@ -37,6 +34,9 @@ const Home = () => {
     }
   };
     
+  useEffect(()=>{
+    confirmLoggedIn();
+  },[]);
 
   return (
     <div>
