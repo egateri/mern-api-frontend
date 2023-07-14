@@ -21,9 +21,6 @@ const Users = () => {
 
   const token = localStorage.getItem("ourtoken");
 
-  useEffect(()=>{
-    confirmLoggedIn();
-  },[]);
 
 
   const confirmLoggedIn = async()=>{
@@ -43,10 +40,15 @@ const Users = () => {
     }
 
     } catch (error) {
+      navigate("/login");
+
      console.error(+error) 
     }
   };
 
+  useEffect(()=>{
+    confirmLoggedIn();
+  },[]);
 
 
 

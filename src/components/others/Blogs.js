@@ -8,9 +8,7 @@ const Blogs = () => {
 
   const token = localStorage.getItem("ourtoken");
 
-  useEffect(()=>{
-    confirmLoggedIn();
-  },[]);
+ 
 
 
   const confirmLoggedIn = async()=>{
@@ -30,9 +28,13 @@ const Blogs = () => {
     }
 
     } catch (error) {
-     console.error(+error) 
+      navigate("/login");
+     console.error(error) 
     }
   };
+  useEffect(()=>{
+    confirmLoggedIn();
+  },[]);
   return (
     <div>
       <h2>My blogs to be updated!</h2>

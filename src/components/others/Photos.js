@@ -9,10 +9,7 @@ const Photos = () => {
 
   const token = localStorage.getItem("ourtoken");
 
-  useEffect(()=>{
-    confirmLoggedIn();
-  },[]);
-
+  
 
   const confirmLoggedIn = async()=>{
 
@@ -31,9 +28,14 @@ const Photos = () => {
     }
 
     } catch (error) {
-     console.error(+error) 
+      navigate("/login");
+     console.error(error) 
     }
   };
+  useEffect(()=>{
+    confirmLoggedIn();
+  },[]);
+
   return (
     <div>
       <h2>My Photos to be updated!</h2>

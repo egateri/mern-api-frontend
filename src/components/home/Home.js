@@ -31,7 +31,7 @@ const Home = () => {
 
     } catch (error) {
 
-     console.error(+error);
+     console.error(error);
      navigate("/login"); 
     }
   };

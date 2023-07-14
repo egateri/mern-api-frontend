@@ -8,10 +8,7 @@ const Reviews = () => {
 
   const token = localStorage.getItem("ourtoken");
 
-  useEffect(()=>{
-    confirmLoggedIn();
-  },[]);
-
+  
 
   const confirmLoggedIn = async()=>{
 
@@ -30,9 +27,14 @@ const Reviews = () => {
     }
 
     } catch (error) {
-     console.error(+error) 
+      navigate("/login");
+     console.error(error) 
     }
   };
+  useEffect(()=>{
+    confirmLoggedIn();
+  },[]);
+
   return (
     <div>
       <h2>My Reviews to updated!</h2>
