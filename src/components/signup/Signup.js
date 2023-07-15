@@ -25,7 +25,7 @@ const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("https://mern-auth-backend-api-sq2e.onrender.com/register", values)
+      .post(process.env.REACT_APP_API+"/register", values)
       .then((res) => {
         if (res.data.message === "success") {
           // localStorage.setItem("ourtoken",res.data.user.token);

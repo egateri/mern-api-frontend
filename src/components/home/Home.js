@@ -15,7 +15,7 @@ const Home = () => {
   const confirmLoggedIn = async()=>{
 
     try {
-     const res = await axios.post( "https://mern-auth-backend-api-sq2e.onrender.com/authwithtoken",{ token },{ Headers: {"Content-Type": "application/json", },});
+     const res = await axios.post(process.env.REACT_APP_API+"/authwithtoken",{ token },{ Headers: {"Content-Type": "application/json", },});
     //  return response;
      console.log(res.data.message);
 
