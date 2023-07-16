@@ -1,41 +1,35 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
-
+import { useNavigate } from "react-router-dom";
 
 async function loginUser(credentials) {
-    return fetch(process.env.REACT_APP_API+'/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    })
-      .then(data=> data.json())
-   }
-   
+  return fetch(process.env.REACT_APP_API + "/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  }).then((data) => data.json());
+}
 
-const Login =({ setToken }) => {
-
+const LoginHeader = () => {
   const [errorMessage, setErrorMessage] = useState("");
-
-
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  
-    const handleSubmit = async e => {
-      e.preventDefault();
-      const token = await loginUser({email,
-        password});
-        console.log("Received Token "+token?.message);
-      if(token?.message==="Success"){
-        return setToken(token);
-      }
 
-      else{
-        setErrorMessage(token?.message);
-      }
+  const navigate = useNavigate();
 
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = await loginUser({ email, password });
+    console.log("Received Token " + token?.message);
+    if (token?.message === "Success") {
+      sessionStorage.setItem("token", JSON.stringify(token));
+
+      navigate("/");
+    } else {
+      setErrorMessage(token?.message);
+    }
+  };
 
   return (
     <div>
@@ -48,8 +42,9 @@ const Login =({ setToken }) => {
                 <strong>Email</strong>
               </label>
               <input
-                type="email" placeholder="Enter Email"
-                onChange={e => setEmail(e.target.value)} 
+                type="email"
+                placeholder="Enter Email"
+                onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 className="form-control rounded-0 "
                 required
@@ -62,7 +57,7 @@ const Login =({ setToken }) => {
               <input
                 type="password"
                 placeholder="Enter password"
-                onChange={e => setPassword(e.target.value)} 
+                onChange={(e) => setPassword(e.target.value)}
                 name="password"
                 className="form-control rounded-0 "
                 required
@@ -71,9 +66,12 @@ const Login =({ setToken }) => {
             <button type="submit" className="btn btn-success w-100 rounded-0">
               <strong>Login</strong>
             </button>
-            <div className="alert alert-warning mb-3" > {errorMessage}</div>
+            <div className="alert alert-warning mb-3"> {errorMessage}</div>
             <p>You agree to Terms and Conditions</p>
-            <a href="/signup" className="btn btn-default border rounded-0 bg-light w-100 text-decoration-none">
+            <a
+              href="/signup"
+              className="btn btn-default border rounded-0 bg-light w-100 text-decoration-none"
+            >
               <strong>Create Account</strong>
             </a>
           </form>
@@ -81,8 +79,6 @@ const Login =({ setToken }) => {
       </div>
     </div>
   );
-}
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-  };
-export default Login;
+};
+
+export default LoginHeader;

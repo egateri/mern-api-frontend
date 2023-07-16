@@ -1,41 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect } from "react";
-
+import Login from "../login/Login";
+import useToken from "../../useToken";
 const Photos = () => {
     
-  const navigate = useNavigate();
+  const { token, setToken } = useToken();
 
-  const token = localStorage.getItem("ourtoken");
-
-  
-
-  const confirmLoggedIn = async()=>{
-
-    try {
-     const res = await axios.post(process.env.REACT_APP_API+"/authwithtoken",{ token },{ Headers: {"Content-Type": "application/json", },});
-    //  return response;
-     console.log(res.data.message);
-
-     if(res.data.message ==="Success"){
-      navigate("/photos")
-
-    }
-    else{
-
-      navigate("/login");
-    }
-
-    } catch (error) {
-      navigate("/login");
-     console.error(error) 
-    }
-  };
-  useEffect(()=>{
-    confirmLoggedIn();
-  },[]);
-
+  console.log("Initial Token: " +token);
+  if(!token){
+   
+    return <Login setToken = {setToken}/>;
+  }
   return (
     <div>
       <h2>My Photos to be updated!</h2>

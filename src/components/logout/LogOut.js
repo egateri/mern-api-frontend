@@ -1,7 +1,8 @@
 import React from "react";
 const LogOut = () => {
     
-  localStorage.removeItem("ourtoken");
+  // localStorage.removeItem("ourtoken");
+  sessionStorage.removeItem('token');
 
   return (
     <div>

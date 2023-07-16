@@ -29,7 +29,7 @@ const Signup = () => {
       .then((res) => {
         if (res.data.message === "success") {
           // localStorage.setItem("ourtoken",res.data.user.token);
-          navigate("/login");
+          navigate("/");
         }
         else if (res.data === "Error") {
           handleError("Server Errors");

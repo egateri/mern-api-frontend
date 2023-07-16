@@ -34,6 +34,11 @@ const Header = (props) => {
               </a>
             </li>
             <li className="nav-item">
+              <a className="nav-link" href="/users" >
+                Users
+              </a>
+            </li>
+            <li className="nav-item">
               <a className="nav-link" href="/signup">
                 Sign Up
               </a>
@@ -41,11 +46,6 @@ const Header = (props) => {
             <li className="nav-item">
               <a className="nav-link" href="/login">
                 Login
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/users" onClick={props.test}>
-                Users
               </a>
             </li>
             <li className="nav-item">
