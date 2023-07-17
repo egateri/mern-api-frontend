@@ -28,16 +28,16 @@ const Login =() => {
   const handleSubmit = async (event) => {
     event.preventDefault();
    await axios
-      .post(process.env.REACT_APP_API+"/login", values,{Headers: {
+      .get(process.env.REACT_APP_API+"/loginwithcookietest", values,{Headers: {
         "Content-Type": "application/json",
         
     }})
       .then((res) => {
         
-        if (res.data.message ==="Success") {
+        if (res.data.success ===true) {
           // console.log(res.data.token);
-         localStorage.setItem("ourtoken",res.data.token);
-          navigate("/");
+        //  localStorage.setItem("ourtoken",res.data.token);
+          navigate("/signup");
           
         } 
         else if(res.data.message ==="Unsuccess"){
