@@ -1,50 +1,53 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const[name,setName] =useState("");
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("ourtoken");
+  const user = JSON.parse(localStorage.getItem("user"));
 
  
  
-  const confirmLoggedIn = async()=>{
+ 
+   
+   axios.post(process.env.REACT_APP_API+"/authwithcookie",{ withCredentials:true})
 
-    try {
-     const res = await axios.post(process.env.REACT_APP_API+"/authwithtoken",{ token },{ Headers: {"Content-Type": "application/json", },});
-    //  return response;
-     console.log(res.data.message);
+   .then((res)=>{
+    console.log(res.data.message);
 
      if(res.data.message ==="Success"){
-      setName(res.data.name);
-      navigate("/")
+      // setName(res.data.name);
+     
+
+      return (
+        <div>
+          <h2>Welcome Home : {user?.first_name}</h2>
+        </div>
+      );
+    
 
     }
     else{
 
-      navigate("/login");
+      navigate("/login")
     }
 
-    } catch (error) {
+   })
+   .catch((error)=>{
+    console.error(error);
+    navigate("/"); 
+   });
+    //  return response;
+     
 
-     console.error(error);
-     navigate("/login"); 
-    }
-  };
+   
+  
     
-  useEffect(()=>{
-    confirmLoggedIn();
-  },[]);
-
-  return (
-    <div>
-      <h2>Welcome Home : {name}</h2>
-    </div>
-  );
-
+  
+ 
 };
 export default Home;
